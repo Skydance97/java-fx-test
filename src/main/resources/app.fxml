@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TreeItem?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/10.0.1" fx:controller="by.silverscreen.controller.HumanController">
+    <children>
+        <TreeTableView fx:id="humanTreeTableView" layoutX="5.0" layoutY="5.0" prefHeight="340.0" prefWidth="590.0"
+                       showRoot="false" stylesheets="@styles.css">
+            <TreeItem fx:id="rootTreeItem"/>
+            <columns>
+                <TreeTableColumn prefWidth="200.0" resizable="false" text="Name"/>
+                <TreeTableColumn minWidth="0.0" prefWidth="150.0" resizable="false" text="Age"/>
+                <TreeTableColumn prefWidth="240.0" resizable="false" text="Birthday"/>
+            </columns>
+        </TreeTableView>
+        <Button layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="25.0"
+                prefWidth="100.0" stylesheets="@styles.css" text="Add"/>
+        <Button layoutX="250.0" layoutY="355.0" mnemonicParsing="false" onAction="#OnEdit" prefHeight="25.0"
+                prefWidth="100.0" stylesheets="@styles.css" text="Edit"/>
+        <Button layoutX="486.0" layoutY="355.0" mnemonicParsing="false" onAction="#OnDelete" prefHeight="25.0"
+                prefWidth="100.0" stylesheets="@styles.css" text="Delete"/>
+    </children>
+</AnchorPane>

@@ -1,0 +1,18 @@
+.button {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.tree-table-view {
+    -fx-background-color: lime;
+    -fx-text-fill: purple;
+}
+
+.tree-table-row-cell {
+    -fx-background-color: lightgrey;
+}
+
+.tree-table-row-cell:selected {
+    -fx-background-color: darkgrey;
+    -fx-table-cell-border-color: darkgrey;
+}

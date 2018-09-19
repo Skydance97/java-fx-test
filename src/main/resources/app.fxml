@@ -4,18 +4,17 @@
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.TreeItem?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="by.silverscreen.controller.HumanController">
     <children>
         <TreeTableView fx:id="humanTreeTableView" layoutX="5.0" layoutY="5.0" prefHeight="340.0" prefWidth="590.0"
                        showRoot="false" stylesheets="@styles.css">
-            <TreeItem fx:id="rootTreeItem"/>
             <columns>
-                <TreeTableColumn prefWidth="200.0" resizable="false" text="Name"/>
-                <TreeTableColumn minWidth="0.0" prefWidth="150.0" resizable="false" text="Age"/>
-                <TreeTableColumn prefWidth="240.0" resizable="false" text="Birthday"/>
+                <TreeTableColumn fx:id="nameTreeTableColumn" prefWidth="200.0" resizable="false" text="Name"/>
+                <TreeTableColumn fx:id="ageTreeTableColumn" minWidth="0.0" prefWidth="150.0" resizable="false"
+                                 text="Age"/>
+                <TreeTableColumn fx:id="birthdayTreeTableColumn" prefWidth="240.0" resizable="false" text="Birthday"/>
             </columns>
         </TreeTableView>
         <Button layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#OnAdd" prefHeight="25.0"

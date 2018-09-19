@@ -7,15 +7,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/10.0.1" fx:controller="by.silverscreen.controller.SaveHumanController">
+            fx:controller="by.silverscreen.controller.SaveHumanController">
     <children>
         <Label layoutX="281.0" layoutY="54.0" text="Human"/>
-        <TextField layoutX="35.0" layoutY="110.0" prefHeight="25.0" prefWidth="540.0" promptText="Name"/>
-        <TextField layoutX="35.0" layoutY="160.0" prefHeight="25.0" prefWidth="540.0" promptText="Age"/>
+        <TextField fx:id="nameTextField" layoutX="35.0" layoutY="110.0" prefHeight="25.0" prefWidth="540.0"
+                   promptText="Name"/>
+        <TextField fx:id="ageTextField" layoutX="35.0" layoutY="160.0" prefHeight="25.0" prefWidth="540.0"
+                   promptText="Age"/>
         <Button layoutX="150.0" layoutY="310.0" mnemonicParsing="false" onAction="#OnSave" prefHeight="25.0"
                 prefWidth="100.0" stylesheets="@styles.css" text="Save"/>
         <Button layoutX="350.0" layoutY="310.0" mnemonicParsing="false" onAction="#OnCancel" prefHeight="25.0"
                 prefWidth="100.0" stylesheets="@styles.css" text="Cancel"/>
-        <DatePicker layoutX="35.0" layoutY="210.0" prefHeight="25.0" prefWidth="540.0" promptText="Birthday"/>
+        <DatePicker fx:id="birthdayDatePicker" layoutX="35.0" layoutY="210.0" prefHeight="25.0" prefWidth="540.0"
+                    promptText="Birthday"/>
     </children>
 </AnchorPane>

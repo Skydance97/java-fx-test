@@ -35,14 +35,28 @@ public class HumanController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.humanTreeTableView.setRoot(this.rootTreeItem);
+        humanTreeTableView.setRoot(rootTreeItem);
 
-        this.nameTreeTableColumn.setCellValueFactory(v -> v.getValue().getValue().nameProperty());
-        this.ageTreeTableColumn.setCellValueFactory(v -> v.getValue().getValue().ageProperty());
-        this.birthdayTreeTableColumn.setCellValueFactory(v -> v.getValue().getValue().birthdayProperty());
+        nameTreeTableColumn.setCellValueFactory(v -> v.getValue().getValue().nameProperty());
+        ageTreeTableColumn.setCellValueFactory(v -> v.getValue().getValue().ageProperty());
+        birthdayTreeTableColumn.setCellValueFactory(v -> v.getValue().getValue().birthdayProperty());
 
-        this.rootTreeItem.getChildren().add(new TreeItem<>(new Human("111", 2, LocalDate.now())));
-        this.rootTreeItem.getChildren().add(new TreeItem<>(new Human("222", 3, LocalDate.now())));
+        humanTreeTableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Human human = humanTreeTableView.getSelectionModel().getSelectedItem().getValue();
+                if (human.getBirthday().compareTo(LocalDate.now()) == 0) {
+                    AlertGenerator.showAlert(
+                            AlertType.INFORMATION,
+                            "Birthday",
+                            "Birthday notification",
+                            "Today '" + human.getName() + "' has birthday"
+                    );
+                }
+            }
+        });
+
+        // Test for birthday notification data
+        rootTreeItem.getChildren().add(new TreeItem<>(new Human("test", 1, LocalDate.now())));
     }
 
     @FXML
@@ -54,7 +68,7 @@ public class HumanController implements Initializable {
             Scene scene = new Scene(parent);
 
             SaveHumanController controller = fxmlLoader.getController();
-            controller.setRoot(this.rootTreeItem);
+            controller.setRoot(rootTreeItem);
             controller.setHuman(null);
 
             Stage stage = new Stage();
@@ -71,15 +85,15 @@ public class HumanController implements Initializable {
     @FXML
     public void OnEdit() {
         try {
-            final int index = this.humanTreeTableView.getSelectionModel().getSelectedIndex();
+            final int index = humanTreeTableView.getSelectionModel().getSelectedIndex();
             URL url = App.class.getClassLoader().getResource("save.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent parent = fxmlLoader.load();
             Scene scene = new Scene(parent);
 
             SaveHumanController controller = fxmlLoader.getController();
-            controller.setRoot(this.rootTreeItem);
-            controller.setHuman(this.rootTreeItem.getChildren().get(index).getValue());
+            controller.setRoot(rootTreeItem);
+            controller.setHuman(rootTreeItem.getChildren().get(index).getValue());
 
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -97,8 +111,8 @@ public class HumanController implements Initializable {
     @FXML
     public void OnDelete() {
         try {
-            final int index = this.humanTreeTableView.getSelectionModel().getSelectedIndex();
-            this.rootTreeItem.getChildren().remove(index);
+            final int index = humanTreeTableView.getSelectionModel().getSelectedIndex();
+            rootTreeItem.getChildren().remove(index);
         } catch (IndexOutOfBoundsException e) {
             AlertGenerator.showAlert(AlertType.WARNING, "Delete", "No human selected", "Please, select a human in the table");
         }

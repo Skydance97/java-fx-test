@@ -104,6 +104,8 @@ public class SaveHumanController {
             if (age < 1) {
                 validity = false;
             }
+
+            // TODO: Change birthday validation
             if (this.birthdayDatePicker.getValue().isAfter(LocalDate.now().minusYears(age))) {
                 validity = false;
             }

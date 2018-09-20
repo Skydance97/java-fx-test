@@ -55,7 +55,7 @@ public class HumanController implements Initializable {
             }
         });
 
-        // Test for birthday notification data
+        // Test data for birthday notification
         rootTreeItem.getChildren().add(new TreeItem<>(new Human("test", 1, LocalDate.now())));
     }
 

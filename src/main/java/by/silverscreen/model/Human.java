@@ -31,10 +31,6 @@ public class Human implements Serializable {
         this.birthday = new SimpleObjectProperty<>(birthday);
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public String getName() {
         return name.get();
     }

@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS `humans`;
+
+USE `humans`;
+
+CREATE TABLE IF NOT EXISTS `human` (
+    `id` BIGINT AUTO_INCREMENT NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
+    `age` SMALLINT NOT NULL,
+    `birthday` DATETIME NOT NULL,
+    PRIMARY KEY (`id`)
+) DEFAULT CHARSET = `utf8`;

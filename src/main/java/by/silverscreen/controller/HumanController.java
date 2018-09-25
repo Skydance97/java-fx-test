@@ -1,7 +1,7 @@
 package by.silverscreen.controller;
 
 import by.silverscreen.App;
-import by.silverscreen.model.Human;
+import by.silverscreen.model.wrapper.HumanWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,15 +23,15 @@ import static javafx.scene.control.Alert.*;
 public class HumanController implements Initializable {
 
     @FXML
-    private TreeTableView<Human> humanTreeTableView;
+    private TreeTableView<HumanWrapper> humanTreeTableView;
     @FXML
-    private TreeTableColumn<Human, String> nameTreeTableColumn;
+    private TreeTableColumn<HumanWrapper, String> nameTreeTableColumn;
     @FXML
-    private TreeTableColumn<Human, Number> ageTreeTableColumn;
+    private TreeTableColumn<HumanWrapper, Number> ageTreeTableColumn;
     @FXML
-    private TreeTableColumn<Human, LocalDate> birthdayTreeTableColumn;
+    private TreeTableColumn<HumanWrapper, LocalDate> birthdayTreeTableColumn;
 
-    private TreeItem<Human> rootTreeItem = new TreeItem<>();
+    private TreeItem<HumanWrapper> rootTreeItem = new TreeItem<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,7 +43,7 @@ public class HumanController implements Initializable {
 
         humanTreeTableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-                Human human = humanTreeTableView.getSelectionModel().getSelectedItem().getValue();
+                HumanWrapper human = humanTreeTableView.getSelectionModel().getSelectedItem().getValue();
                 if (human.getBirthday().compareTo(LocalDate.now()) == 0) {
                     AlertGenerator.showAlert(
                             AlertType.INFORMATION,
@@ -56,7 +56,7 @@ public class HumanController implements Initializable {
         });
 
         // Test for birthday notification data
-        rootTreeItem.getChildren().add(new TreeItem<>(new Human("test", 1, LocalDate.now())));
+        rootTreeItem.getChildren().add(new TreeItem<>(new HumanWrapper("test", 1, LocalDate.now())));
     }
 
     @FXML
@@ -69,7 +69,7 @@ public class HumanController implements Initializable {
 
             SaveHumanController controller = fxmlLoader.getController();
             controller.setRoot(rootTreeItem);
-            controller.setHuman(null);
+            controller.setHumanWrapper(null);
 
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -93,7 +93,7 @@ public class HumanController implements Initializable {
 
             SaveHumanController controller = fxmlLoader.getController();
             controller.setRoot(rootTreeItem);
-            controller.setHuman(rootTreeItem.getChildren().get(index).getValue());
+            controller.setHumanWrapper(rootTreeItem.getChildren().get(index).getValue());
 
             Stage stage = new Stage();
             stage.setScene(scene);

@@ -1,6 +1,6 @@
 package by.silverscreen.controller;
 
-import by.silverscreen.model.Human;
+import by.silverscreen.model.wrapper.HumanWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -25,15 +25,15 @@ public class SaveHumanController {
     @FXML
     private DatePicker birthdayDatePicker;
 
-    private TreeItem<Human> root;
+    private TreeItem<HumanWrapper> root;
 
-    private Human human;
+    private HumanWrapper human;
 
-    public void setRoot(TreeItem<Human> root) {
+    public void setRoot(TreeItem<HumanWrapper> root) {
         this.root = root;
     }
 
-    public void setHuman(Human human) {
+    public void setHumanWrapper(HumanWrapper human) {
         this.human = human;
         initSaveForm();
     }
@@ -42,9 +42,9 @@ public class SaveHumanController {
     public void OnSave() {
         try {
             if (this.human == null) {
-                addHuman();
+                addHumanWrapper();
             } else {
-                editHuman();
+                editHumanWrapper();
             }
             OnCancel();
         } catch (NullPointerException | ValidationException e) {
@@ -58,23 +58,23 @@ public class SaveHumanController {
         stage.close();
     }
 
-    private void addHuman() throws ValidationException {
+    private void addHumanWrapper() throws ValidationException {
         if (isValidFields()) {
-            final Human human = new Human(
+            final HumanWrapper human = new HumanWrapper(
                     this.nameTextField.getText(),
                     Integer.valueOf(this.ageTextField.getText()),
                     this.birthdayDatePicker.getValue()
             );
-            final TreeItem<Human> treeItem = new TreeItem<>(human);
+            final TreeItem<HumanWrapper> treeItem = new TreeItem<>(human);
             Objects.requireNonNull(this.root, "Property root cannot be null").getChildren().add(treeItem);
         } else {
             throw new ValidationException("Not valid some fields");
         }
     }
 
-    private void editHuman() throws ValidationException {
+    private void editHumanWrapper() throws ValidationException {
         if (isValidFields()) {
-            final Human human = Objects.requireNonNull(this.human, "Property human cannot be null");
+            final HumanWrapper human = Objects.requireNonNull(this.human, "Property human cannot be null");
             human.setName(this.nameTextField.getText());
             human.setAge(Integer.valueOf(this.ageTextField.getText()));
             human.setBirthday(this.birthdayDatePicker.getValue());

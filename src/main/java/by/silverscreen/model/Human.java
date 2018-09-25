@@ -1,70 +1,61 @@
 package by.silverscreen.model;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.Objects;
 
+@Entity
 public class Human implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
-    private SimpleStringProperty name;
-    private SimpleIntegerProperty age;
-    private SimpleObjectProperty<LocalDate> birthday;
+    private long id;
+    private String name;
+    private short age;
+    private Timestamp birthday;
 
-    public Human() {
+    @Id
+    @Column(name = "id")
+    public long getId() {
+        return id;
     }
 
-    public Human(SimpleStringProperty name, SimpleIntegerProperty age, SimpleObjectProperty<LocalDate> birthday) {
-        this.name = name;
-        this.age = age;
-        this.birthday = birthday;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public Human(String name, int age, LocalDate birthday) {
-        this.name = new SimpleStringProperty(name);
-        this.age = new SimpleIntegerProperty(age);
-        this.birthday = new SimpleObjectProperty<>(birthday);
-    }
-
+    @Basic
+    @Column(name = "name")
     public String getName() {
-        return name.get();
-    }
-
-    public SimpleStringProperty nameProperty() {
         return name;
     }
 
     public void setName(String name) {
-        this.name.set(name);
+        this.name = name;
     }
 
-    public int getAge() {
-        return age.get();
-    }
-
-    public SimpleIntegerProperty ageProperty() {
+    @Basic
+    @Column(name = "age")
+    public short getAge() {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age.set(age);
+    public void setAge(short age) {
+        this.age = age;
     }
 
-    public LocalDate getBirthday() {
-        return birthday.get();
-    }
-
-    public SimpleObjectProperty<LocalDate> birthdayProperty() {
+    @Basic
+    @Column(name = "birthday")
+    public Timestamp getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday.set(birthday);
+    public void setBirthday(Timestamp birthday) {
+        this.birthday = birthday;
     }
 
     @Override
@@ -72,23 +63,15 @@ public class Human implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return Objects.equals(name, human.name) &&
-                Objects.equals(age, human.age) &&
+        return id == human.id &&
+                age == human.age &&
+                Objects.equals(name, human.name) &&
                 Objects.equals(birthday, human.birthday);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, age, birthday);
-    }
-
-    @Override
-    public String toString() {
-        return "Human{" +
-                "name=" + name +
-                ", age=" + age +
-                ", birthday=" + birthday +
-                '}';
+        return Objects.hash(id, name, age, birthday);
     }
 }
